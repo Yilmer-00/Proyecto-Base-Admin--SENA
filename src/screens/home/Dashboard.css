@@ -1,0 +1,87 @@
+/* Banner Anuncios */
+.announcement-container {
+  z-index: 100;
+}
+
+.announcement-carousel {
+  border-radius: 16px;
+  background: linear-gradient(135deg, #00324d 0%, #001e30 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+  transition: transform 0.3s ease;
+}
+
+.btn-close-custom {
+  z-index: 105;
+  opacity: 0.8;
+}
+
+.announcement-text-max {
+  max-width: 650px;
+}
+
+.carousel-control-custom {
+  width: 5% !important;
+}
+
+/* Banner de Bienvenida */
+.dashboard-main-container {
+  max-width: 1100px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.banner-welcome {
+  background: linear-gradient(135deg, #39A900 0%, #2f8c00 100%);
+  border-radius: 15px;
+}
+
+.welcome-icon {
+  width: 80px;
+  height: 80px;
+}
+
+/* Botones y Badges Institucionales */
+.badge-sena, .btn-sena {
+  background-color: #39A900 !important;
+}
+
+/* Tarjetas de Métricas */
+.metric-card {
+  border-radius: 10px;
+}
+
+.metric-aprendices { border-left: 5px solid #39A900 !important; }
+.metric-instructores { border-left: 5px solid #00324d !important; }
+.metric-cursos { border-left: 5px solid #ffc107 !important; }
+.metric-computadores { border-left: 5px solid #17a2b8 !important; }
+.metric-areas { border-left: 5px solid #6f42c1 !important; }
+.metric-centros { border-left: 5px solid #e83e8c !important; }
+
+/* Accesos Rápidos */
+.quick-card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.hover-scale {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-shadow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08) !important;
+}
+
+.transition-all {
+  transition: all 0.3s ease;
+}
+
+.text-navy { color: #00324d; }
+.text-purple { color: #6f42c1; }
+.text-pink { color: #e83e8c; }
