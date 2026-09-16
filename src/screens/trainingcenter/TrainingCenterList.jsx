@@ -8,7 +8,7 @@ const TrainingCenterList = ({ trainingCenters = [], successMessage }) => {
             {/* Botones de Navegación Rápida */}
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <span className="text-muted fw-bold">Módulo de Centros</span>
-                <Link to="/training-center/create" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
+                <Link to="/TrainingCenterRegister" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
                     ➕ Nuevo Centro de Formación
                 </Link>
             </div>

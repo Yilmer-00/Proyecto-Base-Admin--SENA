@@ -1,5 +1,5 @@
 import React from 'react';
-// Si usas React Router, puedes cambiar las etiquetas <a> por <Link to="...">
+
 
 const Navbar = ({ user, onLogout }) => {
     return (
@@ -9,7 +9,7 @@ const Navbar = ({ user, onLogout }) => {
                 {`
                     .navbar-nav .nav-link:hover {
                         color: #ffffff !important;
-                        background-color: rgba(0, 0, 0, 0.1);
+                        background-color: rgba(0, 255, 55, 0.12);
                         border-radius: 4px;
                         transition: all 0.3s ease;
                     }

@@ -24,6 +24,8 @@ import TrainingCenterList from "./screens/trainingcenter/TrainingCenterList";
 import TeacherList from "./screens/teacher/teacherlist";
 import CourseList from "./screens/course/CourseList"
 import CourseTeacherList from "./screens/course_teacher/CourseTeacherList"
+
+import AreaListExample from './screens/area/AreaListExample'
 const App = () => {
   return (
     <>
@@ -51,6 +53,10 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Carnet" element={<Carnet />} />
+
+        <Route path="/AreaListExample" element={<AreaListExample />} />
+
+
       </Routes>
       <Footer />
     </>

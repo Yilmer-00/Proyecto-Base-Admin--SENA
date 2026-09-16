@@ -12,7 +12,7 @@ const CourseList = ({ courses = [], onDelete, successMessage }) => {
         <span className="text-muted fw-bold">Módulo de Cursos (Fichas)</span>
         {/* Botón para ir al formulario de creación con estilo verde SENA */}
         <Link
-          to="/course/registro"
+          to="/CourseRegister"
           className="btn btn-success btn-sm shadow-sm text-decoration-none"
           style={{ backgroundColor: "#39A900", border: "none" }}
         >

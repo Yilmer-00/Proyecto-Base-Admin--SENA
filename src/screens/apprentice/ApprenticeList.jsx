@@ -7,7 +7,7 @@ const ApprenticeList = ({ apprentices = [], onDelete, successMessage }) => {
             {/* Botones de Navegación Rápida */}
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <span className="text-muted fw-bold">Módulo de Gestión de Aprendices</span>
-                <a href="/apprentice/registro" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
+                <a href="/ApprenticeRegister" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
                     ➕ Registrar Nuevo Aprendiz
                 </a>
             </div>

@@ -16,7 +16,7 @@ const CourseTeacherList = ({
         <span className="text-muted fw-bold">Módulo de Asignaciones</span>
         {/* Botón que apunta a la ruta de registro */}
         <Link
-          to="/course-teacher/registro"
+          to="/CourseTeacherRegister"
           className="btn btn-success btn-sm shadow-sm text-decoration-none"
           style={{ backgroundColor: "#39A900", border: "none" }}
         >

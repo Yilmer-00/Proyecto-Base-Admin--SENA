@@ -9,7 +9,7 @@ const AreaList = ({ areas = [], onDelete, successMessage }) => {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <span className="text-muted fw-bold">Módulo de Áreas</span>
                 {/* Botón para ir al formulario de creación */}
-                <Link to="/area/create" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
+                <Link to="/AreaRegister" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
                     ➕ Registrar Nueva Área
                 </Link>
             </div>
@@ -103,5 +103,6 @@ const AreaList = ({ areas = [], onDelete, successMessage }) => {
         </div>
     );
 };
+
 
 export default AreaList;

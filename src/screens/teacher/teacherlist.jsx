@@ -9,7 +9,7 @@ const TeacherList = ({ teachers = [], onDelete, successMessage }) => {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <span className="text-muted fw-bold">Módulo de Instructores</span>
                 {/* Botón para registrar un nuevo docente */}
-                <Link to="/teacher/create" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
+                <Link to="/TeacherRegister" className="btn btn-success btn-sm shadow-sm text-decoration-none" style={{ backgroundColor: '#39A900', border: 'none' }}>
                     ➕ Nuevo Profesor
                 </Link>
             </div>
