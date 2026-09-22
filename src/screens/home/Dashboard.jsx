@@ -1,402 +1,239 @@
 import React, { useState } from 'react';
-import './Dashboard.css';
+
+const announcements = [
+  {
+    badge: '📢 NOVEDAD DEL SISTEMA',
+    badgeStyle: 'bg-emerald-100 text-emerald-800',
+    title: '¡Nuevo Módulo de Exportación de Reportes!',
+    desc: 'Ahora puedes generar listas completas de computadores e instructores asignados directamente en Excel y PDF.',
+    link: '/computers',
+    linkText: 'Ver Módulo',
+  },
+  {
+    badge: '⚠️ ATENCIÓN INSTRUCTORES',
+    badgeStyle: 'bg-amber-100 text-amber-800',
+    title: 'Cierre de Registro de Fichas',
+    desc: 'Recuerda verificar que todos los aprendices vinculados a tu formación estén registrados correctamente en el sistema.',
+    link: '/courses',
+    linkText: 'Revisar Fichas',
+  },
+  {
+    badge: '🔔 MANTENIMIENTO PROGRAMADO',
+    badgeStyle: 'bg-sky-100 text-sky-800',
+    title: 'Actualización de Servidores',
+    desc: 'La plataforma estará en mantenimiento el sábado de 10:00 PM a 2:00 AM para optimización de la base de datos.',
+    extraBadge: 'Sábado 10:00 PM',
+  },
+  {
+    badge: '📢 CONVOCATORIAS ABIERTAS',
+    badgeStyle: 'bg-amber-100 text-amber-800',
+    title: 'Descubre las Ofertas de Formación',
+    desc: 'Explora los programas disponibles, consulta estadísticas de aspirantes en tiempo real y monitorea los cupos de cada ficha.',
+    link: '/offers',
+    linkText: 'Ver Ofertas',
+  },
+];
 
 export default function Dashboard() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % announcements.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + announcements.length) % announcements.length);
+  };
+
+  const activeAnnouncement = announcements[currentSlide];
 
   return (
-    <div className="container-fluid px-0">
+    <div className="w-full">
       {/* Banner Flotante / Carrusel de Anuncios */}
       {showAnnouncement && (
-        <div id="announcementContainer" className="position-relative mb-5 announcement-container">
-          <div
-            id="announcementCarousel"
-            className="carousel slide shadow-lg text-white announcement-carousel"
-            data-bs-ride="carousel"
+        <div className="relative mb-12 bg-gradient-to-r from-emerald-800 to-emerald-950 text-white rounded-2xl shadow-lg overflow-hidden">
+          {/* Botón para cerrar/descartar */}
+          <button
+            type="button"
+            onClick={() => setShowAnnouncement(false)}
+            className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full focus:outline-none z-10"
+            aria-label="Cerrar"
           >
-            {/* Botón para cerrar/descartar el anuncio */}
-            <button
-              type="button"
-              onClick={() => setShowAnnouncement(false)}
-              className="btn-close btn-close-white position-absolute top-0 end-0 m-3 btn-close-custom"
-              aria-label="Cerrar"
-            ></button>
+            ✕
+          </button>
 
-            {/* Indicadores */}
-            <div className="carousel-indicators mb-2">
-              <button
-                type="button"
-                data-bs-target="#announcementCarousel"
-                data-bs-slide-to="0"
-                className="active"
-                aria-current="true"
-                aria-label="Anuncio 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#announcementCarousel"
-                data-bs-slide-to="1"
-                aria-label="Anuncio 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#announcementCarousel"
-                data-bs-slide-to="2"
-                aria-label="Anuncio 3"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#announcementCarousel"
-                data-bs-slide-to="3"
-                aria-label="Anuncio 4"
-              ></button>
+          {/* Diapositiva Activa */}
+          <div className="p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 min-h-[160px]">
+            <div className="max-w-3xl">
+              <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${activeAnnouncement.badgeStyle}`}>
+                {activeAnnouncement.badge}
+              </span>
+              <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">
+                {activeAnnouncement.title}
+              </h3>
+              <p className="text-sm md:text-base text-emerald-100/80 mb-0">
+                {activeAnnouncement.desc}
+              </p>
             </div>
 
-            {/* Diapositivas de Anuncios */}
-            <div className="carousel-inner">
-              {/* Anuncio 1 */}
-              <div className="carousel-item active" data-bs-interval="6000">
-                <div className="p-4 p-md-5 d-flex align-items-center justify-content-between flex-wrap gap-4">
-                  <div className="announcement-text-max">
-                    <span className="badge px-3 py-2 rounded-pill fw-bold mb-2 badge-sena">
-                      📢 NOVEDAD DEL SISTEMA
-                    </span>
-                    <h3 className="fw-bold mb-2">¡Nuevo Módulo de Exportación de Reportes!</h3>
-                    <p className="mb-0 text-white-50">
-                      Ahora puedes generar listas completas de computadores e instructores asignados directamente en Excel y PDF.
-                    </p>
-                  </div>
-                  <div>
-                    <a href="/computers" className="btn btn-outline-light rounded-pill px-4 py-2 hover-scale">
-                      Ver Módulo
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Anuncio 2 */}
-              <div className="carousel-item" data-bs-interval="6000">
-                <div className="p-4 p-md-5 d-flex align-items-center justify-content-between flex-wrap gap-4">
-                  <div className="announcement-text-max">
-                    <span className="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">
-                      ⚠️ ATENCIÓN INSTRUCTORES
-                    </span>
-                    <h3 className="fw-bold mb-2">Cierre de Registro de Fichas</h3>
-                    <p className="mb-0 text-white-50">
-                      Recuerda verificar que todos los aprendices vinculados a tu formación estén registrados correctamente en el sistema.
-                    </p>
-                  </div>
-                  <div>
-                    <a href="/courses" className="btn btn-outline-light rounded-pill px-4 py-2 hover-scale">
-                      Revisar Fichas
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Anuncio 3 */}
-              <div className="carousel-item" data-bs-interval="6000">
-                <div className="p-4 p-md-5 d-flex align-items-center justify-content-between flex-wrap gap-4">
-                  <div className="announcement-text-max">
-                    <span className="badge bg-info text-dark px-3 py-2 rounded-pill fw-bold mb-2">
-                      🔔 MANTENIMIENTO PROGRAMADO
-                    </span>
-                    <h3 className="fw-bold mb-2">Actualización de Servidores</h3>
-                    <p className="mb-0 text-white-50">
-                      La plataforma estará en mantenimiento el sábado de 10:00 PM a 2:00 AM para optimización de la base de datos.
-                    </p>
-                  </div>
-                  <div>
-                    <span className="badge bg-white bg-opacity-10 text-white px-3 py-2 rounded-pill border border-white border-opacity-25">
-                      Sábado 10:00 PM
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Anuncio 4 */}
-              <div className="carousel-item" data-bs-interval="6000">
-                <div className="p-4 p-md-5 d-flex align-items-center justify-content-between flex-wrap gap-4">
-                  <div className="announcement-text-max">
-                    <span className="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-2">
-                      📢 CONVOCATORIAS ABIERTAS
-                    </span>
-                    <h3 className="fw-bold mb-2">Descubre las Ofertas de Formación</h3>
-                    <p className="mb-0 text-white-50">
-                      Explora los programas disponibles, consulta estadísticas de aspirantes en tiempo real y monitorea los cupos de cada ficha.
-                    </p>
-                  </div>
-                  <div>
-                    <a href="/offers" className="btn btn-outline-light rounded-pill px-4 py-2 hover-scale">
-                      Ver Ofertas
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <div className="shrink-0 flex items-center gap-4">
+              {activeAnnouncement.link ? (
+                <a
+                  href={activeAnnouncement.link}
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:scale-105"
+                >
+                  {activeAnnouncement.linkText}
+                </a>
+              ) : (
+                <span className="bg-white/10 text-white px-4 py-2 rounded-full border border-white/20 text-sm">
+                  {activeAnnouncement.extraBadge}
+                </span>
+              )}
             </div>
+          </div>
 
-            {/* Controles de navegación */}
-            <button
-              className="carousel-control-prev carousel-control-custom"
-              type="button"
-              data-bs-target="#announcementCarousel"
-              data-bs-slide="prev"
-            >
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Anterior</span>
-            </button>
-            <button
-              className="carousel-control-next carousel-control-custom"
-              type="button"
-              data-bs-target="#announcementCarousel"
-              data-bs-slide="next"
-            >
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Siguiente</span>
-            </button>
+          {/* Controles de navegación y Paginación */}
+          <div className="flex items-center justify-between px-6 pb-4 pt-2 border-t border-white/10">
+            <div className="flex space-x-2">
+              {announcements.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentSlide(idx)}
+                  className={`h-2 rounded-full transition-all ${
+                    currentSlide === idx ? 'w-6 bg-white' : 'w-2 bg-white/40'
+                  }`}
+                  aria-label={`Ir al anuncio ${idx + 1}`}
+                />
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={prevSlide}
+                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs transition"
+              >
+                Anterior
+              </button>
+              <button
+                onClick={nextSlide}
+                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs transition"
+              >
+                Siguiente
+              </button>
+            </div>
           </div>
         </div>
       )}
 
       {/* Contenedor Principal */}
-      <div className="container dashboard-main-container">
+      <div className="max-w-7xl mx-auto">
         {/* Banner de Bienvenida */}
-        <div className="card border-0 shadow-sm text-white mb-5 banner-welcome">
-          <div className="card-body p-5 d-flex align-items-center justify-content-between flex-wrap gap-4">
+        <div className="bg-gradient-to-r from-[#39A900] to-emerald-700 text-white rounded-2xl shadow-sm mb-10 overflow-hidden">
+          <div className="p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <h1 class="display-5 fw-bold mb-2">¡Bienvenido a AdminSena!</h1>
-              <p className="lead mb-0 opacity-90">
+              <h1 className="text-3xl md:text-4xl font-extrabold mb-2">¡Bienvenido a AdminSena!</h1>
+              <p className="text-base md:text-lg text-emerald-50 mb-0">
                 Sistema de gestión de inventarios, aprendices, instructores y ambientes de formación.
               </p>
             </div>
-            <div className="fs-1 bg-white bg-opacity-20 p-4 rounded-circle d-flex align-items-center justify-content-center shadow-sm welcome-icon">
+            <div className="text-4xl bg-white/20 p-5 rounded-full flex items-center justify-center shadow-sm shrink-0">
               🏢
             </div>
           </div>
         </div>
 
         {/* Sección: Estado del Sistema */}
-        <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-          <h4 className="text-secondary fw-bold mb-0">📊 Estado del Sistema (Métricas)</h4>
-          <a href="/offers" className="btn text-white fw-bold px-4 py-2 rounded-pill shadow-sm btn-sena">
+        <div className="flex flex-wrap justify-between items-center mb-6 gap-3">
+          <h2 className="text-xl font-bold text-gray-700 mb-0">📊 Estado del Sistema (Métricas)</h2>
+          <a
+            href="/offers"
+            className="bg-[#39A900] hover:bg-[#2e8a00] text-white font-bold px-5 py-2.5 rounded-full shadow-sm text-sm transition-all"
+          >
             📢 Ver Ofertas de Formación
           </a>
         </div>
 
-        <div className="row g-4 mb-5">
-          {/* Aprendices */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-aprendices">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Aprendices</span>
-                  <h3 className="fw-bold mb-0 text-dark">Activos</h3>
-                </div>
-                <span className="fs-2 text-success">👨‍🎓</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {[
+            { label: 'Aprendices', value: 'Activos', emoji: '👨‍🎓', color: 'text-emerald-600' },
+            { label: 'Instructores', value: 'Asignados', emoji: '👨‍🏫', color: 'text-blue-900' },
+            { label: 'Cursos / Fichas', value: 'Registrados', emoji: '📚', color: 'text-amber-500' },
+            { label: 'Inventario PC', value: 'Equipos', emoji: '💻', color: 'text-cyan-500' },
+            { label: 'Áreas', value: 'Especialidades', emoji: '🛠️', color: 'text-purple-600' },
+            { label: 'Sedes', value: 'Centros', emoji: '🏛️', color: 'text-pink-500' },
+          ].map((metric, idx) => (
+            <div key={idx} className="bg-white rounded-xl shadow-sm p-5 border border-gray-100 flex items-center justify-between">
+              <div>
+                <span className="text-gray-500 text-sm font-semibold block mb-1">{metric.label}</span>
+                <h3 className="text-xl font-bold text-gray-900 mb-0">{metric.value}</h3>
               </div>
+              <span className="text-3xl">{metric.emoji}</span>
             </div>
-          </div>
-
-          {/* Instructores */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-instructores">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Instructores</span>
-                  <h3 className="fw-bold mb-0 text-dark">Asignados</h3>
-                </div>
-                <span className="fs-2 text-navy">👨‍🏫</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Cursos */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-cursos">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Cursos / Fichas</span>
-                  <h3 className="fw-bold mb-0 text-dark">Registrados</h3>
-                </div>
-                <span className="fs-2 text-warning">📚</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Computadores */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-computadores">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Inventario PC</span>
-                  <h3 className="fw-bold mb-0 text-dark">Equipos</h3>
-                </div>
-                <span className="fs-2 text-info">💻</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Áreas */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-areas">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Áreas</span>
-                  <h3 className="fw-bold mb-0 text-dark">Especialidades</h3>
-                </div>
-                <span className="fs-2 text-purple">🛠️</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Centros */}
-          <div className="col-md-4 col-sm-6">
-            <div className="card h-100 border-0 shadow-sm p-3 metric-card metric-centros">
-              <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  <span className="text-muted fw-semibold d-block mb-1">Sedes</span>
-                  <h3 className="fw-bold mb-0 text-dark">Centros</h3>
-                </div>
-                <span className="fs-2 text-pink">🏛️</span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Sección: Accesos Rápidos */}
-        <h4 className="text-secondary fw-bold mb-4">🚀 Panel de Accesos Rápidos</h4>
-        <div className="row g-4">
-          {/* Tarjeta: Aprendices */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Gestión de Aprendices</h5>
-                  <p className="text-muted small">
-                    Administra los datos personales de los estudiantes, asignación de computadores y fichas asociadas.
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/apprentices" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/apprentices/register" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
+        <h2 className="text-xl font-bold text-gray-700 mb-6">🚀 Panel de Accesos Rápidos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              title: 'Gestión de Aprendices',
+              desc: 'Administra los datos personales de los estudiantes, asignación de computadores y fichas asociadas.',
+              listHref: '/apprentices',
+              regHref: '/apprentices/register',
+            },
+            {
+              title: 'Cursos y Fichas',
+              desc: 'Organiza las fichas de formación, jornadas de estudio, áreas técnicas y centros responsables.',
+              listHref: '/courses',
+              regHref: '/courses/register',
+            },
+            {
+              title: 'Instructores',
+              desc: 'Controla el personal docente, sus correos de contacto, especialidad y vincula su labor a las fichas.',
+              listHref: '/teachers',
+              regHref: '/teachers/create',
+            },
+            {
+              title: 'Inventario de Equipos',
+              desc: 'Registra marcas y números de plaqueta para mantener el control de los computadores de la institución.',
+              listHref: '/computers',
+              regHref: '/computers/create',
+            },
+            {
+              title: 'Áreas de Formación',
+              desc: 'Define las diferentes tecnologías y programas académicos (Sistemas, Diseño, Contabilidad, etc.).',
+              listHref: '/areas',
+              regHref: '/areas/create',
+            },
+            {
+              title: 'Centros de Formación',
+              desc: 'Crea y edita los centros físicos de capacitación institucional junto con sus ubicaciones geográficas.',
+              listHref: '/training-centers',
+              regHref: '/training-centers/create',
+            },
+          ].map((card, idx) => (
+            <div key={idx} className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
+              <div>
+                <h5 className="font-bold text-gray-900 text-lg mb-2">{card.title}</h5>
+                <p className="text-gray-500 text-sm mb-6">{card.desc}</p>
+              </div>
+              <div className="flex gap-2 pt-4 border-t border-gray-100">
+                <a
+                  href={card.listHref}
+                  className="flex-1 text-center border border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-xs font-semibold py-2 rounded-lg transition"
+                >
+                  Ver Listado
+                </a>
+                <a
+                  href={card.regHref}
+                  className="flex-1 text-center bg-[#39A900] hover:bg-[#2e8a00] text-white text-xs font-semibold py-2 rounded-lg transition"
+                >
+                  Registrar
+                </a>
               </div>
             </div>
-          </div>
-
-          {/* Tarjeta: Cursos */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Cursos y Fichas</h5>
-                  <p className="text-muted small">
-                    Organiza las fichas de formación, jornadas de estudio, áreas técnicas y centros responsables.
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/courses" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/courses/register" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tarjeta: Instructores */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Instructores</h5>
-                  <p className="text-muted small">
-                    Controla el personal docente, sus correos de contacto, especialidad y vincula su labor a las fichas.
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/teachers" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/teachers/create" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tarjeta: Computadores */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Inventario de Equipos</h5>
-                  <p className="text-muted small">
-                    Registra marcas y números de plaqueta para mantener el control de los computadores de la institución.
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/computers" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/computers/create" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tarjeta: Áreas */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Áreas de Formación</h5>
-                  <p className="text-muted small">
-                    Define las diferentes tecnologías y programas académicos (Sistemas, Diseño, Contabilidad, etc.).
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/areas" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/areas/create" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Tarjeta: Centros */}
-          <div className="col-md-4">
-            <div className="card border-0 shadow-sm h-100 hover-shadow transition-all quick-card">
-              <div className="card-body p-4 bg-white d-flex flex-column justify-content-between">
-                <div>
-                  <h5 className="fw-bold text-dark mb-2">Centros de Formación</h5>
-                  <p className="text-muted small">
-                    Crea y edita los centros físicos de capacitación institucional junto con sus ubicaciones geográficas.
-                  </p>
-                </div>
-                <div className="d-flex gap-2 mt-3 pt-3 border-top">
-                  <a href="/training-centers" className="btn btn-outline-success btn-sm w-100">
-                    Ver Listado
-                  </a>
-                  <a href="/training-centers/create" className="btn btn-success btn-sm w-100 btn-sena border-0">
-                    Registrar
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
