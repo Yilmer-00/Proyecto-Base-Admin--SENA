@@ -34,7 +34,7 @@ const Footer = () => {
               <ul className="space-y-2 text-sm">
                 <li>
                   <a
-                    href="/teacher/create"
+                    href="/TeacherRegister"
                     className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
                   >
                     Instructores
@@ -42,7 +42,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/area/create"
+                    href="/AreaRegister"
                     className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
                   >
                     Áreas
@@ -50,7 +50,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/computer/create"
+                    href="/ComputerRegister"
                     className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
                   >
                     Inventario PC
@@ -60,7 +60,7 @@ const Footer = () => {
               <ul className="space-y-2 text-sm">
                 <li>
                   <a
-                    href="/course"
+                    href="/CourseRegister"
                     className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
                   >
                     Fichas/Cursos
@@ -68,7 +68,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="/course-teacher"
+                    href="/CourseTeacherRegister"
                     className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
                   >
                     Asignaciones

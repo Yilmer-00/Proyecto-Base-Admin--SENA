@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Datos de prueba para el módulo de anuncios del carrusel
@@ -28,7 +29,33 @@ const mockAnnouncements = [
     }
 ];
 
-const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, successMessage }) => {
+const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, successMessage: propSuccessMessage }) => {
+    const [announcementsList, setAnnouncementsList] = useState(announcements);
+    const [successMessage, setSuccessMessage] = useState(propSuccessMessage || '');
+
+    // Estados para los modales interactivos
+    const [viewAnnouncement, setViewAnnouncement] = useState(null); // Para "Mostrar"
+    const [editAnnouncement, setEditAnnouncement] = useState(null); // Para "Editar"
+
+    // 1. Función Eliminar
+    const handleDelete = (id) => {
+        if (window.confirm('¿Seguro que deseas eliminar este anuncio?')) {
+            setAnnouncementsList(announcementsList.filter(announcement => announcement.id !== id));
+            setSuccessMessage('Anuncio eliminado exitosamente.');
+            if (onDelete) onDelete(id);
+            setTimeout(() => setSuccessMessage(''), 3000);
+        }
+    };
+
+    // 2. Guardar Edición
+    const handleSaveEdit = (e) => {
+        e.preventDefault();
+        setAnnouncementsList(announcementsList.map(a => a.id === editAnnouncement.id ? editAnnouncement : a));
+        setEditAnnouncement(null);
+        setSuccessMessage('Anuncio actualizado exitosamente.');
+        setTimeout(() => setSuccessMessage(''), 3000);
+    };
+
     return (
         <div className="max-w-[1050px] mx-auto mt-[30px] px-4">
 
@@ -54,7 +81,7 @@ const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, success
                         type="button"
                         className="text-green-700 hover:text-green-900 font-bold text-xl leading-none bg-transparent border-0 cursor-pointer"
                         aria-label="Close"
-                        onClick={(e) => e.target.closest('div').remove()}
+                        onClick={() => setSuccessMessage('')}
                     >
                         &times;
                     </button>
@@ -76,8 +103,8 @@ const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, success
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-100">
-                                {announcements && announcements.length > 0 ? (
-                                    announcements.map((announcement) => (
+                                {announcementsList && announcementsList.length > 0 ? (
+                                    announcementsList.map((announcement) => (
                                         <tr key={announcement.id} className="hover:bg-gray-50 transition-colors">
                                             {/* Orden */}
                                             <td className="pl-6 py-4 font-bold text-gray-600">
@@ -112,23 +139,29 @@ const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, success
                                             {/* Acciones */}
                                             <td className="pr-6 py-4 text-center">
                                                 <div className="flex gap-2 justify-center items-center">
-                                                    {/* Botón Editar */}
-                                                    <Link
-                                                        to={`/announcements/${announcement.id}/edit`}
-                                                        className="bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold text-xs px-3 py-1.5 rounded shadow-sm transition-colors no-underline"
+                                                    {/* Botón Mostrar (Abre Modal) */}
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setViewAnnouncement(announcement)}
+                                                        className="bg-blue-600 hover:bg-blue-700 text-white text-xs px-3 py-1.5 rounded shadow-sm transition-colors font-medium cursor-pointer border-0"
+                                                    >
+                                                        Mostrar
+                                                    </button>
+
+                                                    {/* Botón Editar (Abre Modal de Edición) */}
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setEditAnnouncement(announcement)}
+                                                        className="bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold text-xs px-3 py-1.5 rounded shadow-sm transition-colors cursor-pointer border-0"
                                                     >
                                                         Editar
-                                                    </Link>
+                                                    </button>
 
                                                     {/* Botón Eliminar */}
                                                     <button
                                                         type="button"
                                                         className="bg-red-600 hover:bg-red-700 text-white text-xs font-medium px-3 py-1.5 rounded shadow-sm transition-colors cursor-pointer border-0"
-                                                        onClick={() => {
-                                                            if (window.confirm('¿Seguro que deseas eliminar este anuncio?')) {
-                                                                if (onDelete) onDelete(announcement.id);
-                                                            }
-                                                        }}
+                                                        onClick={() => handleDelete(announcement.id)}
                                                     >
                                                         Eliminar
                                                     </button>
@@ -150,6 +183,99 @@ const AnnouncementList = ({ announcements = mockAnnouncements, onDelete, success
                     </div>
                 </div>
             </div>
+
+            {/* MODAL MOSTRAR DETALLES */}
+            {viewAnnouncement && (
+                <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
+                    <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+                        <h3 className="text-lg font-bold text-gray-800 mb-4">🔍 Detalle del Anuncio</h3>
+                        <div className="space-y-2 text-sm text-gray-600 mb-6 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <p><strong>ID:</strong> {viewAnnouncement.id}</p>
+                            <p><strong>Orden:</strong> {viewAnnouncement.order}</p>
+                            <p><strong>Insignia:</strong> {viewAnnouncement.badge_text}</p>
+                            <p><strong>Título:</strong> {viewAnnouncement.title}</p>
+                            <p><strong>Estado:</strong> {viewAnnouncement.is_active ? 'Activo' : 'Inactivo'}</p>
+                        </div>
+                        <div className="flex justify-end">
+                            <button
+                                onClick={() => setViewAnnouncement(null)}
+                                className="bg-gray-500 hover:bg-gray-600 text-white text-xs font-medium px-4 py-2 rounded cursor-pointer border-0"
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* MODAL EDITAR ANUNCIO */}
+            {editAnnouncement && (
+                <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4">
+                    <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+                        <h3 className="text-lg font-bold text-gray-800 mb-4">✏️ Editar Anuncio</h3>
+                        <form onSubmit={handleSaveEdit}>
+                            <div className="mb-3">
+                                <label className="block text-xs font-bold text-gray-500 mb-1">Orden</label>
+                                <input
+                                    type="number"
+                                    value={editAnnouncement.order}
+                                    onChange={(e) => setEditAnnouncement({ ...editAnnouncement, order: Number(e.target.value) })}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#39A900]"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="block text-xs font-bold text-gray-500 mb-1">Texto de la Insignia (Badge)</label>
+                                <input
+                                    type="text"
+                                    value={editAnnouncement.badge_text}
+                                    onChange={(e) => setEditAnnouncement({ ...editAnnouncement, badge_text: e.target.value })}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#39A900]"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label className="block text-xs font-bold text-gray-500 mb-1">Título del Anuncio</label>
+                                <input
+                                    type="text"
+                                    value={editAnnouncement.title}
+                                    onChange={(e) => setEditAnnouncement({ ...editAnnouncement, title: e.target.value })}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#39A900]"
+                                    required
+                                />
+                            </div>
+                            <div className="mb-4 flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="is_active_check"
+                                    checked={editAnnouncement.is_active}
+                                    onChange={(e) => setEditAnnouncement({ ...editAnnouncement, is_active: e.target.checked })}
+                                    className="w-4 h-4 text-[#39A900] focus:ring-[#39A900] border-gray-300 rounded cursor-pointer"
+                                />
+                                <label htmlFor="is_active_check" className="text-xs font-bold text-gray-700 cursor-pointer">
+                                    Anuncio Activo
+                                </label>
+                            </div>
+                            <div className="flex justify-end gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setEditAnnouncement(null)}
+                                    className="bg-gray-400 hover:bg-gray-500 text-white text-xs px-4 py-2 rounded cursor-pointer border-0 font-medium"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    className="bg-[#39A900] hover:bg-[#329400] text-white text-xs px-4 py-2 rounded cursor-pointer border-0 font-bold"
+                                >
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 };
