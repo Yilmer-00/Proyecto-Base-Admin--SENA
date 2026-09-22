@@ -1,207 +1,149 @@
-import React from 'react';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <>
-      <style>{`
-        .hover-green {
-          transition: all 0.25s ease-in-out;
-        }
-        .hover-green:hover {
-          color: #39A900 !important;
-          padding-left: 5px;
-        }
-        .social-btn {
-          width: 36px;
-          height: 36px;
-          padding: 0;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          border-color: rgba(255, 255, 255, 0.15) !important;
-          transition: all 0.3s ease;
-        }
-        .social-btn:hover {
-          background-color: #39A900 !important;
-          border-color: #39A900 !important;
-          transform: translateY(-3px);
-          box-shadow: 0 4px 10px rgba(57, 169, 0, 0.3);
-        }
-      `}</style>
+    <footer className="bg-gray-900 text-gray-100 py-12 mt-12 border-t border-gray-800 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      <footer
-        className="bg-dark text-light py-5 mt-5 border-top border-secondary"
-        style={{ fontFamily: "'Segoe UI', Roboto, sans-serif" }}
-      >
-        <div className="container">
-          <div className="row g-4">
-            {/* Columna 1: Branding y Propósito */}
-            <div className="col-lg-4 col-md-6">
-              <div className="d-flex align-items-center mb-3">
-                <div
-                  style={{
-                    width: '5px',
-                    height: '32px',
-                    backgroundColor: '#39A900',
-                    borderRadius: '2px',
-                  }}
-                  className="me-2"
-                ></div>
-                <h4 className="text-white fw-bolder mb-0 tracking-wide">
-                  AdminSENA
-                </h4>
-              </div>
-              <p className="text-white-50 small pe-lg-4">
-                Plataforma integral para la gestión, control e inventario de
-                ambientes de formación, instructores y recursos tecnológicos de
-                la institución.
-              </p>
-              <div className="d-inline-flex align-items-center bg-secondary bg-opacity-25 px-3 py-1 rounded-pill mt-2">
-                <span
-                  className="spinner-grow spinner-grow-sm text-success me-2"
-                  role="status"
-                  style={{ width: '10px', height: '10px' }}
-                ></span>
-                <span
-                  className="text-white small fw-semibold"
-                  style={{ fontSize: '0.75rem' }}
-                >
-                  Todos los sistemas operativos
-                </span>
-              </div>
+          {/* Columna 1: Branding y Propósito */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-1.5 h-8 bg-[#39A900] rounded-sm"></div>
+              <h4 className="text-white font-extrabold text-xl tracking-wide mb-0">
+                AdminSENA
+              </h4>
             </div>
-
-            {/* Columna 2: Enlaces Rápidos de Navegación */}
-            <div className="col-lg-4 col-md-6">
-              <h5 className="text-white fw-bold mb-3">Accesos Rápidos</h5>
-              <div className="row">
-                <div className="col-6">
-                  <ul className="list-unstyled mb-0">
-                    <li className="mb-2">
-                      <a
-                        href="/teacher/create"
-                        className="text-white-50 text-decoration-none hover-green small"
-                      >
-                        <i className="fas fa-chevron-right me-1 small"></i>{' '}
-                        Instructores
-                      </a>
-                    </li>
-                    <li className="mb-2">
-                      <a
-                        href="/area/create"
-                        className="text-white-50 text-decoration-none hover-green small"
-                      >
-                        <i className="fas fa-chevron-right me-1 small"></i> Áreas
-                      </a>
-                    </li>
-                    <li className="mb-2">
-                      <a
-                        href="/computer/create"
-                        className="text-white-50 text-decoration-none hover-green small"
-                      >
-                        <i className="fas fa-chevron-right me-1 small"></i>{' '}
-                        Inventario PC
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div className="col-6">
-                  <ul className="list-unstyled mb-0">
-                    <li className="mb-2">
-                      <a
-                        href="/course"
-                        className="text-white-50 text-decoration-none hover-green small"
-                      >
-                        <i className="fas fa-chevron-right me-1 small"></i>{' '}
-                        Fichas/Cursos
-                      </a>
-                    </li>
-                    <li className="mb-2">
-                      <a
-                        href="/course-teacher"
-                        className="text-white-50 text-decoration-none hover-green small"
-                      >
-                        <i className="fas fa-chevron-right me-1 small"></i>{' '}
-                        Asignaciones
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Columna 3: Información del Centro de Formación */}
-            <div className="col-lg-4 col-md-12">
-              <h5 className="text-white fw-bold mb-3">Centro de Operación</h5>
-              <p className="text-white-50 small mb-2">
-                <i className="fas fa-map-marked-alt text-success me-2 fs-5"></i>{' '}
-                Centro de Comercio y Servicios — Regional Cauca
-              </p>
-              <p className="text-white-50 small mb-2">
-                <i className="fas fa-headset text-success me-2 fs-5"></i> Mesa
-                de ayuda: +57 (602) 8224000
-              </p>
-
-              {/* Iconos de Redes */}
-              <div className="mt-3">
-                <a
-                  href="https://facebook.com"
-                  className="btn btn-outline-secondary btn-sm rounded-circle me-2 social-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-facebook-f text-white"></i>
-                </a>
-                <a
-                  href="https://twitter.com"
-                  className="btn btn-outline-secondary btn-sm rounded-circle me-2 social-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-twitter text-white"></i>
-                </a>
-                <a
-                  href="https://instagram.com"
-                  className="btn btn-outline-secondary btn-sm rounded-circle social-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="fab fa-instagram text-white"></i>
-                </a>
-              </div>
+            <p className="text-gray-400 text-sm leading-relaxed pr-lg-4">
+              Plataforma integral para la gestión, control e inventario de
+              ambientes de formación, instructores y recursos tecnológicos de
+              la institución.
+            </p>
+            <div className="inline-flex items-center bg-gray-800/60 px-3 py-1.5 rounded-full mt-2 border border-gray-700/50">
+              <span className="w-2.5 h-2.5 bg-[#39A900] rounded-full animate-pulse mr-2"></span>
+              <span className="text-white text-xs font-semibold">
+                Todos los sistemas operativos
+              </span>
             </div>
           </div>
 
-          <hr className="my-4 border-secondary opacity-50" />
+          {/* Columna 2: Enlaces Rápidos de Navegación */}
+          <div className="space-y-4">
+            <h5 className="text-white font-bold text-base mb-3">Accesos Rápidos</h5>
+            <div className="grid grid-cols-2 gap-4">
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a
+                    href="/teacher/create"
+                    className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
+                  >
+                    Instructores
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/area/create"
+                    className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
+                  >
+                    Áreas
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/computer/create"
+                    className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
+                  >
+                    Inventario PC
+                  </a>
+                </li>
+              </ul>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a
+                    href="/course"
+                    className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
+                  >
+                    Fichas/Cursos
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/course-teacher"
+                    className="text-gray-400 hover:text-[#39A900] transition-all duration-200 hover:translate-x-1 inline-block no-underline"
+                  >
+                    Asignaciones
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-          {/* Copyright y Crédito */}
-          <div
-            className="row align-items-center small"
-            style={{ color: '#b0b3b8' }}
-          >
-            <div className="col-md-4 text-center text-md-start">
-              <p className="mb-0">
-                &copy; {currentYear}{' '}
-                <strong className="text-white">AdminSENA</strong>. Hecho para
-                el ambiente de formación.
-              </p>
-            </div>
-            <div className="col-md-4 text-center my-2 my-md-0">
-              <span className="badge bg-dark border border-secondary text-white px-3 py-2">
-                Versión de Producción 2.1.0
-              </span>
-            </div>
-            <div className="col-md-4 text-center text-md-end">
-              <span className="text-success fw-bold fs-6">
-                Yilmer Alexander Melenge Cordoba 👋
-              </span>
+          {/* Columna 3: Información del Centro de Formación */}
+          <div className="space-y-4">
+            <h5 className="text-white font-bold text-base mb-3">Centro de Operación</h5>
+            <p className="text-gray-400 text-sm flex items-center space-x-2">
+              <span className="text-[#39A900] text-base">📍</span>
+              <span>Centro de Comercio y Servicios — Regional Cauca</span>
+            </p>
+            <p className="text-gray-400 text-sm flex items-center space-x-2">
+              <span className="text-[#39A900] text-base">🎧</span>
+              <span>Mesa de ayuda: +57 (602) 8224000</span>
+            </p>
+
+            {/* Iconos de Redes */}
+            <div className="flex space-x-3 pt-2">
+              <a
+                href="https://facebook.com"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-full border border-gray-700 text-white transition-all duration-300 hover:bg-[#39A900] hover:border-[#39A900] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#39A900]/30"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                🌐
+              </a>
+              <a
+                href="https://twitter.com"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-full border border-gray-700 text-white transition-all duration-300 hover:bg-[#39A900] hover:border-[#39A900] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#39A900]/30"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                💬
+              </a>
+              <a
+                href="https://instagram.com"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-full border border-gray-700 text-white transition-all duration-300 hover:bg-[#39A900] hover:border-[#39A900] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#39A900]/30"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📸
+              </a>
             </div>
           </div>
         </div>
-      </footer>
-    </>
+
+        <hr className="my-8 border-gray-800" />
+
+        {/* Copyright y Crédito */}
+        <div className="flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 gap-4">
+          <div className="text-center md:text-left">
+            <p className="mb-0">
+              &copy; {currentYear}{' '}
+              <strong className="text-white">AdminSENA</strong>. Hecho para
+              el ambiente de formación.
+            </p>
+          </div>
+          <div className="text-center">
+            <span className="bg-gray-800 border border-gray-700 text-white px-3 py-1.5 rounded-full text-xs font-medium">
+              Versión de Producción 2.1.0
+            </span>
+          </div>
+          <div className="text-center md:text-right">
+            <span className="text-[#39A900] font-bold text-sm">
+              Yilmer Alexander Melenge Cordoba 👋
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

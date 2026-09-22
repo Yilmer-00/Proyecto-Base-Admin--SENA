@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const announcements = [
   {
@@ -49,7 +49,7 @@ export default function Dashboard() {
   const activeAnnouncement = announcements[currentSlide];
 
   return (
-    <div className="w-full">
+    <div className="w-full px-4 md:px-8 py-6">
       {/* Banner Flotante / Carrusel de Anuncios */}
       {showAnnouncement && (
         <div className="relative mb-12 bg-gradient-to-r from-emerald-800 to-emerald-950 text-white rounded-2xl shadow-lg overflow-hidden">
@@ -57,7 +57,7 @@ export default function Dashboard() {
           <button
             type="button"
             onClick={() => setShowAnnouncement(false)}
-            className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full focus:outline-none z-10"
+            className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full focus:outline-none z-10 transition cursor-pointer"
             aria-label="Cerrar"
           >
             ✕
@@ -81,7 +81,7 @@ export default function Dashboard() {
               {activeAnnouncement.link ? (
                 <a
                   href={activeAnnouncement.link}
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:scale-105"
+                  className="bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full px-5 py-2.5 text-sm font-semibold transition-all hover:scale-105 no-underline"
                 >
                   {activeAnnouncement.linkText}
                 </a>
@@ -100,9 +100,8 @@ export default function Dashboard() {
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`h-2 rounded-full transition-all ${
-                    currentSlide === idx ? 'w-6 bg-white' : 'w-2 bg-white/40'
-                  }`}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${currentSlide === idx ? 'w-6 bg-white' : 'w-2 bg-white/40'
+                    }`}
                   aria-label={`Ir al anuncio ${idx + 1}`}
                 />
               ))}
@@ -110,13 +109,13 @@ export default function Dashboard() {
             <div className="flex gap-2">
               <button
                 onClick={prevSlide}
-                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs transition"
+                className="px-3 py-1 bg-white/10 hover:bg-white/25 rounded-full text-xs transition cursor-pointer"
               >
                 Anterior
               </button>
               <button
                 onClick={nextSlide}
-                className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs transition"
+                className="px-3 py-1 bg-white/10 hover:bg-white/25 rounded-full text-xs transition cursor-pointer"
               >
                 Siguiente
               </button>
@@ -147,7 +146,7 @@ export default function Dashboard() {
           <h2 className="text-xl font-bold text-gray-700 mb-0">📊 Estado del Sistema (Métricas)</h2>
           <a
             href="/offers"
-            className="bg-[#39A900] hover:bg-[#2e8a00] text-white font-bold px-5 py-2.5 rounded-full shadow-sm text-sm transition-all"
+            className="bg-[#39A900] hover:bg-[#2e8a00] text-white font-bold px-5 py-2.5 rounded-full shadow-sm text-sm transition-all no-underline"
           >
             📢 Ver Ofertas de Formación
           </a>
@@ -155,12 +154,12 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {[
-            { label: 'Aprendices', value: 'Activos', emoji: '👨‍🎓', color: 'text-emerald-600' },
-            { label: 'Instructores', value: 'Asignados', emoji: '👨‍🏫', color: 'text-blue-900' },
-            { label: 'Cursos / Fichas', value: 'Registrados', emoji: '📚', color: 'text-amber-500' },
-            { label: 'Inventario PC', value: 'Equipos', emoji: '💻', color: 'text-cyan-500' },
-            { label: 'Áreas', value: 'Especialidades', emoji: '🛠️', color: 'text-purple-600' },
-            { label: 'Sedes', value: 'Centros', emoji: '🏛️', color: 'text-pink-500' },
+            { label: 'Aprendices', value: 'Activos', emoji: '👨‍🎓' },
+            { label: 'Instructores', value: 'Asignados', emoji: '👨‍🏫' },
+            { label: 'Cursos / Fichas', value: 'Registrados', emoji: '📚' },
+            { label: 'Inventario PC', value: 'Equipos', emoji: '💻' },
+            { label: 'Áreas', value: 'Especialidades', emoji: '🛠️' },
+            { label: 'Sedes', value: 'Centros', emoji: '🏛️' },
           ].map((metric, idx) => (
             <div key={idx} className="bg-white rounded-xl shadow-sm p-5 border border-gray-100 flex items-center justify-between">
               <div>
@@ -179,14 +178,14 @@ export default function Dashboard() {
             {
               title: 'Gestión de Aprendices',
               desc: 'Administra los datos personales de los estudiantes, asignación de computadores y fichas asociadas.',
-              listHref: '/apprentices',
-              regHref: '/apprentices/register',
+              listHref: '/ApprenticeList',
+              regHref: '/ApprenticeRegister',
             },
             {
               title: 'Cursos y Fichas',
               desc: 'Organiza las fichas de formación, jornadas de estudio, áreas técnicas y centros responsables.',
-              listHref: '/courses',
-              regHref: '/courses/register',
+              listHref: '/CourseList',
+              regHref: '/CourseRegister',
             },
             {
               title: 'Instructores',
@@ -197,20 +196,20 @@ export default function Dashboard() {
             {
               title: 'Inventario de Equipos',
               desc: 'Registra marcas y números de plaqueta para mantener el control de los computadores de la institución.',
-              listHref: '/computers',
-              regHref: '/computers/create',
+              listHref: '/ComputerList',
+              regHref: '/ComputerRegister',
             },
             {
               title: 'Áreas de Formación',
               desc: 'Define las diferentes tecnologías y programas académicos (Sistemas, Diseño, Contabilidad, etc.).',
-              listHref: '/areas',
-              regHref: '/areas/create',
+              listHref: '/AreaList',
+              regHref: '/AreaRegister',
             },
             {
               title: 'Centros de Formación',
               desc: 'Crea y edita los centros físicos de capacitación institucional junto con sus ubicaciones geográficas.',
-              listHref: '/training-centers',
-              regHref: '/training-centers/create',
+              listHref: '/TrainingCenterList',
+              regHref: '/TrainingCenterRegister',
             },
           ].map((card, idx) => (
             <div key={idx} className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 flex flex-col justify-between hover:shadow-md transition-all">
@@ -221,13 +220,13 @@ export default function Dashboard() {
               <div className="flex gap-2 pt-4 border-t border-gray-100">
                 <a
                   href={card.listHref}
-                  className="flex-1 text-center border border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-xs font-semibold py-2 rounded-lg transition"
+                  className="flex-1 text-center border border-emerald-600 text-emerald-600 hover:bg-emerald-50 text-xs font-semibold py-2 rounded-lg transition no-underline"
                 >
                   Ver Listado
                 </a>
                 <a
                   href={card.regHref}
-                  className="flex-1 text-center bg-[#39A900] hover:bg-[#2e8a00] text-white text-xs font-semibold py-2 rounded-lg transition"
+                  className="flex-1 text-center bg-[#39A900] hover:bg-[#2e8a00] text-white text-xs font-semibold py-2 rounded-lg transition no-underline"
                 >
                   Registrar
                 </a>
