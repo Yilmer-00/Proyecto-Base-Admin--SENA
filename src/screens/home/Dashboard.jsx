@@ -6,7 +6,7 @@ const announcements = [
     badgeStyle: 'bg-emerald-100 text-emerald-800',
     title: '¡Nuevo Módulo de Exportación de Reportes!',
     desc: 'Ahora puedes generar listas completas de computadores e instructores asignados directamente en Excel y PDF.',
-    link: '/computers',
+    link: '/ComputerList',
     linkText: 'Ver Módulo',
   },
   {
@@ -14,7 +14,7 @@ const announcements = [
     badgeStyle: 'bg-amber-100 text-amber-800',
     title: 'Cierre de Registro de Fichas',
     desc: 'Recuerda verificar que todos los aprendices vinculados a tu formación estén registrados correctamente en el sistema.',
-    link: '/courses',
+    link: '/CourseList',
     linkText: 'Revisar Fichas',
   },
   {
