@@ -79,6 +79,8 @@ const Navbar = ({ user, onLogout }) => {
                                     <li><a href="/CourseTeacherList" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Instructores en Curso</a></li>
                                     <li><a href="/TrainingCenterList" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Centro de estudio</a></li>
                                     <li><a href="/ApprenticeList" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Gestión de Aprendices</a></li>
+                                    <li><a href="/TrainingOfferList" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Gestión de oferta</a></li>
+
                                     <li><hr className="my-1 border-gray-200" /></li>
                                     <li><a href="/about" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Quiénes Somos</a></li>
                                     <li><a href="/carnet" className="block px-4 py-2 text-sm hover:bg-emerald-50 hover:text-emerald-700">Perfil</a></li>

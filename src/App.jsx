@@ -7,6 +7,8 @@ import Home from "./screens/home/Dashboard";
 import Announcement from "./screens/announcements/announcements";
 import AnnouncementList from "./screens/announcements/AnnouncementList";
 import TrainingOffers from "./screens/offer/TrainingOffers";
+import TrainingOfferRegister from "./screens/offer/TrainingOfferRegister"
+import TrainingOfferList from "./screens/offer/TrainingOfferList"
 import NotificationCenter from "./screens/NotificationCenter/NotificationCenter";
 import About from "./screens/about/about";
 
@@ -61,6 +63,8 @@ const App = () => {
         <Route path="/announcements" element={<Announcement />} />
         <Route path="/AnnouncementList" element={<AnnouncementList />} />
         <Route path="/offers" element={<TrainingOffers />} />
+        <Route path="/TrainingOfferRegister" element={<TrainingOfferRegister />} />
+        <Route path="/TrainingOfferList" element={<TrainingOfferList/>}/>
         <Route path="/notifications" element={<NotificationCenter />} />
         <Route path="/about" element={<About />} />
 

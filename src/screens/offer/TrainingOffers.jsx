@@ -183,7 +183,7 @@ const TrainingOffers = ({ offers = mockOffers }) => {
                     <p className="text-xs text-gray-500 mt-1">Monitoreo de demanda, aspirantes y estado de selección en tiempo real.</p>
                 </div>
                 <Link 
-                    to="/offersRegistre" 
+                    to="/TrainingOfferRegister" 
                     className="bg-[#39A900] hover:bg-[#329400] text-white text-sm font-medium px-4 py-2 rounded shadow-sm transition-colors flex items-center gap-1.5 no-underline whitespace-nowrap"
                 >
                     ➕ Registrar Nueva oferta
